@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quiz Heian Shodan - Resultados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+<body>
+    <div class="container">
+        <h1>Resultados Finais 🏆</h1>
+        
+        <h2>Você acertou <strong>{{ acertos }}</strong> de <strong>{{ total_perguntas }}</strong> perguntas.</h2>
+        <p>Porcentagem de Acerto: <strong>{{ ((acertos / total_perguntas) * 100) | round(2) }}%</strong></p>
+
+        <hr>
+        
+        <h3>Detalhe das Respostas:</h3>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Pergunta</th>
+                    <th>Sua Resposta</th>
+                    <th>Resposta Correta</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in feedback %}
+                <tr>
+                    <td>{{ item.pergunta }}</td>
+                    <td class="{% if item.esta_correta %}acerto{% else %}erro{% endif %}">
+                        {{ item.sua_resposta if item.sua_resposta is not none else 'Não respondido' }}
+                    </td>
+                    <td>{{ item.resposta_correta }}</td>
+                    <td>
+                        {% if item.esta_correta %}
+                            ✅ Acerto
+                        {% else %}
+                            ❌ Erro
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <hr>
+        <a href="{{ url_for('quiz') }}" class="button">Tentar Novamente</a>
+        <a href="{{ url_for('home') }}" class="button" style="background-color: #6c757d;">Voltar para a Home</a>
+    </div>
+</body>
+</html>

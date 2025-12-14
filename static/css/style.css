@@ -1,0 +1,202 @@
+/* ----------------------------------------------------------------
+   1. Variáveis & Reset Básico (Melhoria de Tipografia)
+---------------------------------------------------------------- */
+:root {
+    --color-primary: #34495e; /* Azul Marinho Escuro */
+    --color-secondary: #bdc3c7; /* Cinza Suave para Bordas */
+    --color-background: #F0F4F8; 
+    --color-white: #ffffff;
+    --color-success: #2ecc71; /* Esmeralda */
+    --color-error: #e74c3c; /* Vermelho Cinder */
+    --transition-duration: 0.3s;
+}
+
+body {
+    font-family: 'Roboto', 'Arial', sans-serif; /* Fonte mais moderna */
+    background-color: var(--color-background);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding-top: 40px; /* Espaço no topo */
+}
+
+/* ----------------------------------------------------------------
+   2. Container Principal (Efeito Card)
+---------------------------------------------------------------- */
+.container {
+    width: 90%;
+    max-width: 750px;
+    margin-bottom: 40px;
+    padding: 35px;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    /* Sombra mais suave e moderna */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    transition: box-shadow 0.5s ease-in-out;
+}
+
+/* Animação: Pequeno 'lift' ao passar o mouse (apenas para desktop) */
+.container:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+    color: var(--color-primary); 
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--color-secondary);
+    padding-bottom: 15px;
+    font-size: 2em;
+    font-weight: 700;
+}
+
+h2 {
+    color: var(--color-primary);
+    text-align: center;
+    margin-top: 0;
+}
+
+/* ----------------------------------------------------------------
+   3. Estilos de Botões (Com Animação de Pressionar)
+---------------------------------------------------------------- */
+button, a.button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.15em;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color var(--transition-duration), transform 0.1s ease;
+}
+
+button:hover, a.button:hover {
+    background-color: #2c3e50; /* Um tom ligeiramente mais escuro */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Micro-Animação de "Pressionar" */
+button:active, a.button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ----------------------------------------------------------------
+   4. Estilos do Quiz e Opções de Resposta
+---------------------------------------------------------------- */
+.quiz-pergunta {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid var(--color-secondary);
+    border-left: 5px solid var(--color-primary); /* Barra de destaque */
+    border-radius: 8px;
+    transition: background-color var(--transition-duration);
+}
+
+/* Efeito sutil ao passar o mouse sobre a pergunta */
+.quiz-pergunta:hover {
+    background-color: #fcfdff;
+}
+
+.quiz-pergunta h3 {
+    margin-top: 0;
+    color: var(--color-primary);
+    font-size: 1.2em;
+    margin-bottom: 15px;
+}
+
+.option-wrapper {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.quiz-pergunta input[type="radio"] {
+    /* Esconder o radio button nativo */
+    opacity: 0;
+    position: absolute;
+}
+
+.quiz-pergunta label {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: 2px solid var(--color-secondary);
+    border-radius: 5px;
+    width: 100%;
+    display: block;
+    transition: all var(--transition-duration);
+    font-weight: 500;
+    margin-left: -20px; /* Ajuste para compensar o input escondido */
+}
+
+/* Animação: Label que se destaca ao passar o mouse */
+.quiz-pergunta label:hover {
+    background-color: #e9eff5;
+    border-color: var(--color-primary);
+}
+
+/* Estilo para a opção selecionada */
+.quiz-pergunta input[type="radio"]:checked + label {
+    background-color: #e9eff5;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 5px rgba(52, 73, 94, 0.4);
+    font-weight: bold;
+}
+
+/* ----------------------------------------------------------------
+   5. Estilos da Tabela de Resultados
+---------------------------------------------------------------- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    border-radius: 8px;
+    overflow: hidden; /* Garante que os cantos da tabela sejam arredondados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+table th, table td {
+    border: 1px solid #e1e5e9;
+    padding: 14px;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+table th {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-weight: 600;
+}
+
+/* Estilo para linhas pares da tabela (listra) */
+tbody tr:nth-child(even) {
+    background-color: #f7f9fb;
+}
+
+/* ----------------------------------------------------------------
+   6. Cores de Feedback (Com Ícones e Destaque)
+---------------------------------------------------------------- */
+
+/* A cor de fundo será aplicada ao TD, mas o ícone é adicionado via HTML/Jinja */
+td.acerto {
+    background-color: #d4edda; 
+    color: var(--color-success);
+    font-weight: bold;
+}
+
+td.erro {
+    background-color: #f8d7da;
+    color: var(--color-error);
+    font-weight: bold;
+}

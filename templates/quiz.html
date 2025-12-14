@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quiz Heian Shodan - Perguntas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+<body>
+    <div class="container">
+        <h1>Perguntas sobre o Heian Shodan</h1>
+        
+        <form method="POST" action="{{ url_for('quiz') }}"> 
+
+            {% for pergunta in perguntas %}
+            <div class="quiz-pergunta">
+                <h3>{{ loop.index }}. {{ pergunta.pergunta }}</h3>
+                
+                {% for opcao in pergunta.opcoes %}
+                <div>
+                    <input type="radio" 
+                           id="p{{ pergunta.id }}_o{{ loop.index }}" 
+                           name="pergunta_{{ pergunta.id }}" 
+                           value="{{ opcao }}"
+                           required> 
+                    <label for="p{{ pergunta.id }}_o{{ loop.index }}">{{ opcao }}</label>
+                </div>
+                {% endfor %}
+
+            </div>
+            {% endfor %}
+            
+            <button type="submit">Finalizar Quiz e Ver Resultados</button>
+        </form>
+    </div>
+</body>
+</html>
